@@ -36,8 +36,8 @@ void Toll::addCars( void ){
 
 
 Car* Toll::removeCar( void ){
-	Car* removed_car = carQueuePtr[carsInQueue]; //points to removed car
-	carQueuePtr[carsInQueue] = NULL;			//pointer in carqueue set to null
+	Car* removed_car = carQueuePtr[carsInQueue - 1]; //points to removed car
+	carQueuePtr[carsInQueue - 1] = NULL;			//pointer in carqueue set to null
 	carsInQueue--;
 	return removed_car;
 }
