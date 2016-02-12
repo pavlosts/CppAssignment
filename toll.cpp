@@ -27,7 +27,7 @@ void Toll::addCars( void ){
 	//!!!!!!!!! this rand might be a problem, please revise
 	int newCars = rand() % (50 - carsInQueue);						//Number of new cars entering in carsInQueue < newCars < 50
 	for(int i = carsInQueue; i < carsInQueue + newCars; i++){
-		int destination = rand() % (NSegs - segID + 1) + NSegs		//Calculates a random number in current_segment < destination <= NSegs
+		int destination = rand() % (NSegs - curSeg + 1) + curSeg;		//Calculates a random number in current_segment < destination <= NSegs
 		carQueuePtr[i] = new Car(destination);						//Adds a new car in queue
 	}
 	cout<< "It now has " << carsInQueue << " cars." <<endl;
