@@ -1,5 +1,12 @@
-struct Car{
-	int destination; 				//Segment to reach
-	int position;					//Current segment. Default = -1
-	bool ready;						//True if ready to leave segment. Default = False
+//still no headers
+
+
+Car::Car(int dest, int pos = -1, bool r=false): destination(dest){
+    position = pos;
+    r = ready;
+    cout << "Car created!" << endl;
+}
+
+Car::~Car(){
+    cout << "Car destructed" << endl;
 }
