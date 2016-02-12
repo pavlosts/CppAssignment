@@ -24,7 +24,6 @@ Toll::~Toll(){
 
 void Toll::addCars( void ){
 	cout<< "This toll queue had " << carsInQueue << " cars." << endl;
-	//!!!!!!!!! this rand might be a problem, please revise
 	if(carsInQueue < 100){
 		int newCars = rand() % (100 - carsInQueue);						//Number of new cars entering in carsInQueue < newCars < 50
 		for(int i = carsInQueue; i < carsInQueue + newCars; i++){
