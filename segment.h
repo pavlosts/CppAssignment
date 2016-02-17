@@ -8,14 +8,15 @@ class Segment{
 private:
 	Entrance gate;
 	int numberOfCars;
-	Car carPtr;
+	Car* carPtr[500];
 	int capacity;
 	Segment nextSeg;
 	Segment PrevSeg;
+	int segId;
 public:
-	Segment();
+	Segment(int k, int id);
 	~Segment();
-	void enter();
+	void enter(Car &enteringCar);
 	void exit();
 	void pass();
 	int getNoOfVehicles();
