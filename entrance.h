@@ -10,10 +10,11 @@ private:
 	int K;
 	Toll personToll[5];		//Tolls with personel
 	Toll eToll[5];			//E-Tolls
+	Car* removeCar_toll(int, Toll&, int);        //removes a car if enough space
 public:
 	Entrance(int k, int id);
 	~Entrance( void );
-	void operate(int max);
+	void operate(int, Car*);
 }
 
 #endif
