@@ -13,66 +13,48 @@ K(k), segID(id){
 }
 
 Entrance::~Entrance( void ){
+	for(int i = 0; i < 5; i++){
+		delete personToll[i];
+		delete eToll[i];
+	}
 	cout << "Entrance destroyed." << endl;
 }
-/*Έχω μια ιδέα για βελτίωση της κατανομής αλλά θα το δω
-όταν τελειώσουμε τα υπόλοιπα. Επίσης επειδή έχω κάνει κάτι
-περίεργα, αν δεν καταλάβεις πες μου να σου εξηγήσω.*/
+
+Car* Entrance::removeCar_toll(int spots_left, Toll& toll, int max_cars){
+    if(spots_left > 0 && get_carsPassed()< max_cars){ //if there are spots and we havent reached max
+                spots_left--;
+				get_carsPassed()++;
+				return toll.removeCar();
+			}else{
+				return NULL;
+			}
+}
+
+/*μου φαινεται πιο λογικο να βγαινει απο την entrance και να μπαινει στο seg ενα αμαξι τη φορα,
+ωστε να γλιτωσουμε το array, αλλα αμα το θελει ετσι, περι ορεξεως....*/
+
 Entrance::operate(int max){
-	int carsPassed;								//Counts the number of cars passed from each toll
-	int emptySpotsLeft = max;					//Empty spots left in the segment
-	bool personMax, eMax;
-
-	//Remove cars from personTolls
 	for(int i = 0; i < 5; i++){
-		carsPassed = 0;
-		for(int j = 0; j < K; j++){
-			if(emptySpotsLeft > 0){
-				personToll[i].removeCar();
-				emptySpotsLeft--;
-				carsPassed++;
-			}else{
-				break;
+            personToll[i].set_carsPassed(); //set cars passed from toll to 0;
+            eToll[i].set_carsPassed();
+    	}
+	int emptySpotsLeft = max_Spots;		//Empty spots left in the segment
+	car* carP, carE;
+	do{
+	//Remove cars from Tolls
+	for(int i = 0; i < 5; i++){ //remove one car from every toll
+			carP = removeCar_toll(emptySpotsLeft, personToll[i], K);
+			carE = removeCar_toll(emptySpotsLeft, eToll[i], 2*K);
+			if(i==4){//if the last tolls
+                		if(carE==NULL && carP==NULL) break; //both fail, break(=all tolls have reached max)
 			}
+			//!!!!!βαζουμε τα carE + carP στο entrance queue....!!!!!
 		}
-		if(carsPassed == K){
-			personMax = true;
-		}else{
-			personMax = false;
-		}
-	}
-	//Remove cars from eTolls
-	for(int i = 0; i < 5; i++){
-		carsPassed = 0;
-		for(int j = 0; j < 5; j++){
-			if(emptySpotsLeft > 0){
-				eToll[i].removeCar();
-				emptySpotsLeft--;
-				carsPassed++;
-			}else{
-				break;
-			}
-		}
-		if(carsPassed == 2*K){
-			eMax = true;
-		}else{
-			eMax = false;
-		}
-	}
+	}while(emptySpotsLeft > 0 )
 
-	if(eMax == true && personMax == true){
-		K++;
-	}else{
-		K--;
-	}
-
-	//Add cars to personTolls
+	//Add cars to Tolls
 	for(int i = 0; i < 5; i++){
 		personToll[i].addCars();
-	}
-
-	//Add cars to eTolls
-	for(int i = 0; i < 5; i++){
 		eToll[i].addCars();
 	}
 }
