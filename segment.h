@@ -17,7 +17,8 @@ public:
 	Segment(int k, int id);
 	~Segment();
 	void enter(int); //enters the cars FROM OUTSIDE
-	void exit();
+	void exit_seg();
+	void receive(Car*); //the segment places a car in itself
 	void pass();
 	int getNoOfVehicles(){return numberOfCars;};
 	void operate();
