@@ -21,9 +21,9 @@ public:
 	void receive(Car*); //the segment places a car in itself
 	void pass();
 	int getNoOfVehicles(){return numberOfCars;};
-	void operate(int);
+	int operate(int);
 	void Insert_seg_behind(Segment*); //inserts a segment behind the seg its called with
 	void set_cars_ready(int); //sets a percentage of cars to ready
-}
+};
 
 #endif
