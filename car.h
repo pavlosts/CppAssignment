@@ -1,5 +1,8 @@
-//i havent divided mine to different files, so no includes for you haha
+#ifndef TOLL_H
+#define TOLL_H
 
+#include <iostream>
+#include <string>
 
 class Car{
 private:
@@ -13,3 +16,5 @@ public:
     bool is_ready(){return ready; };
     bool destination_reached(){return (position==destination)};
 };
+
+#endif
