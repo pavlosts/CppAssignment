@@ -81,8 +81,20 @@ void Segment::pass(){
 	}
 }
 
+void Segment::set_cars_ready(int percent){
+    //how many cars will be set to ready?
+    int rcar_no = numberOfCars*percent;
+    //set the cars to ready
+    for(i=(numberOfCars-1); i>=(numberOfCars-rcar_no); i--){
+        cars_in_seg[i]->setready();
+    }
+}
 
-
-void Segment::operate(){
-
+void Segment::operate(int ready_percent){
+    this->exit_seg();   //first the cars that are ready exit the highway
+    this->pass();        //then the cars that are ready pass to the next segment 
+    //then cars enter from outside
+    this->enter(capacity-numberOfCars); //capacity-numberOfCars = EmptySpots
+    //some cars are set to ready
+    this->set_cars_ready(ready_percent);
 }
