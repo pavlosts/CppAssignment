@@ -40,9 +40,11 @@ void Segment::enter(int empty_spots){
 	for(int i = (empty_spots-1); i >= 0; i--){	//Counts the new cars from BACK to front of array
 		if(newCars != NULL){
 			numberOfNewCars++;
-			/*η επαναληψη σου δεν δουλευε, οποτε το εβαλα εδω*/
-			cars_in_seg[numberOfCars] = newCars[i];  //add the new car in the segment
-			numberOfCars++;         //number of cars is now greater
+			/*η επαναληψη σου που ειχες κατω δεν δουλευε, οποτε το εβαλα εδω*/
+			this->recieve(newCars[i]); //adds the new car in (this) segment
+			/*^^^all of this is summarized in the above function*/
+			/*cars_in_seg[numberOfCars] = newCars[i];  //add the new car in the segment
+			numberOfCars++;         //number of cars is now greater*/
 		}else{
 			break;
 		}
@@ -53,7 +55,7 @@ void Segment::enter(int empty_spots){
 	}*/
 }
 
-void Segment::exit(){
+void Segment::exit_seg(){
 	for(int i = numberOfCars - 1; i >= 0; i-- ){
 		if((cars_in_seg[i]->is_ready()) && (cars_in_seg[i]->destination_reached())){
 			delete cars_in_seg[i];
@@ -64,27 +66,22 @@ void Segment::exit(){
 	}
 }
 
+void Segment::recieve(Car* new_car){
+    cars_in_seg[numberOfCars] = new_car;  //add the new car in the segment
+    numberOfCars++;         //number of cars is now greater
+}
+
 void Segment::pass(){
 	for(int i = numberOfCars - 1; i >= 0; i++){
 		if((cars_in_seg[i]->is_ready()) && !(cars_in_seg[i]->destination_reached())){
-			 //car enters next segment
-			/*nextSeg.enter(carPtr[i]); εκτος και αν κανεις override τη συναρτηση, η εντολη αυτη οδηγει στην καταστροφη :Ρ*/
+			//car enters next segment
+			nextSegPtr->receive(cars_in_seg[i]);
+			numberOfCars--;     //because a car has left
 		}
 	}
 }
 
 
-
-void Segment::operate(){
-
-}
-void Segment::pass(){
-
-}
-
-int Segment::getNoOfVehicles(){
-
-}
 
 void Segment::operate(){
 
