@@ -30,7 +30,7 @@ Segment::~Segment(){
 		delete cars_in_seg[i];
 	}
 	delete gate;
-	cout>> "Segment deleted!">>endl;
+	cout >> "Segment deleted!" >> endl;
 }
 
 void Segment::enter(int empty_spots){
@@ -90,11 +90,12 @@ void Segment::set_cars_ready(int percent){
     }
 }
 
-void Segment::operate(int ready_percent){
+int Segment::operate(int ready_percent){
     this->exit_seg();   //first the cars that are ready exit the highway
     this->pass();        //then the cars that are ready pass to the next segment 
     //then cars enter from outside
     this->enter(capacity-numberOfCars); //capacity-numberOfCars = EmptySpots
     //some cars are set to ready
     this->set_cars_ready(ready_percent);
+    return numberOfCars;
 }
