@@ -10,4 +10,6 @@ public:
     Car(int, int, bool);
     ~Car();
     void setready(){ ready = true; };    //sets the car to ready
+    bool is_ready(){return ready; };
+    bool destination_reached(){return (position==destination)};
 };

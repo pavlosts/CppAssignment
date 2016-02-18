@@ -8,19 +8,22 @@ class Segment{
 private:
 	Entrance gate;
 	int numberOfCars;
-	Car* carPtr[500];
+	Car* cars_in_seg[500];
 	int capacity;
-	Segment nextSeg;
-	Segment PrevSeg;
+	Segment* nextSegPtr;
+	Segment* PrevSegPtr;
 	int segId;
 public:
 	Segment(int k, int id);
 	~Segment();
-	void enter(Car &enteringCar);
-	void exit();
+	void enter(int); //enters the cars FROM OUTSIDE
+	void exit_seg();
+	void receive(Car*); //the segment places a car in itself
 	void pass();
-	int getNoOfVehicles();
-	void operate();
+	int getNoOfVehicles(){return numberOfCars;};
+	void operate(int);
+	void Insert_seg_behind(Segment*); //inserts a segment behind the seg its called with
+	void set_cars_ready(int); //sets a percentage of cars to ready
 }
 
 #endif
