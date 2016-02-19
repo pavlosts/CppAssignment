@@ -19,7 +19,7 @@ Highway::~Highway(){
 	for(int i = 0; i < numberOfSegs; i++){
 		delete segments[i];
 	}
-	delete segments;
+	//delete segments; δεν νομιζω πως χρειαζεται
 	cout << "Highway destroyed" << endl;			//poor highway :(
 }
 
@@ -29,4 +29,10 @@ void Highway::operate(){
 		cars += segments[i].operate(percent);		//Sums the cars from each segment
 	}
 	cout << "Cars in highway: " << cars << endl;
+}
+
+void Highway::run_simulation(int n){
+    	for(int i = 0; i < n; i++){
+		this->operate();
+	}
 }
