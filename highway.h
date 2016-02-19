@@ -14,6 +14,7 @@ public:
 	Highway(int NSegs, int K, int P);
 	~Highway();
 	void operate();	
+	void run_simulation(int);
 };
 
 #endif
